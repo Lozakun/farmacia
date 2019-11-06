@@ -1,0 +1,11 @@
+#header {
+    position: relative;
+    height: 80px;
+    width: 100%;
+    background: #007dc6;
+}
+
+h1 {
+    text-align: right;
+    color: white;
+}

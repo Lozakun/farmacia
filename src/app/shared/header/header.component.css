@@ -1,0 +1,16 @@
+.navbar.navbar-light.navbar-fixed-top.navbar-expand-lg {
+    background: #007dc6;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+a .navbar-brand :hover{
+    color: white;
+}
+
+h1 {
+    text-align: right;
+    color: white;
+}

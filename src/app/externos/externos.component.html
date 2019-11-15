@@ -1,15 +1,126 @@
 <div class="container">
-    <div class="row col-md-12">
-        <form [form]="altaProveedor" ngSubmit='guardarProveedor()'>
+    <form class="col-12" 
+    [formGroup]='altaProveedorForm'
+    (ngSubmit)='guardarProveedor()'>
+        <div class="row">
             <div class="col-md-6">
                 <div class="form-group form-inline">
                     <label for="nombreProveedor">Nombre Proveedor:</label>
-                    <input id="nombreProveedor" name="nombreProveedor" type="text">
+                    <input 
+                    id="nombreProveedor"
+                    name="nombreProveedor"
+                    class="form-control"
+                    type="text"
+                    formControlName="nombreProveedor">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="telProveedor">Telefono Proveedor:</label>
+                    <input 
+                    id="telProveedor"
+                    class="form-control"
+                    name="telProveedor"
+                    formControlName="telProveedor"
+                    type="number"
+                    maxlength="10">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="mailProveedor">Correo Proveedor:</label>
+                    <input 
+                    id="mailProveedor"
+                    name="mailProveedor"
+                    class="form-control"
+                    type="email"
+                    formControlName="mailProveedor">
                 </div>
             </div>
             <div class="col-md-6">
-
+                <div class="form-group form-inline">
+                    <label for="rfcProveedor">RFC:</label>
+                    <input 
+                    id="rfcProveedor"
+                    name="rfcProveedor"
+                    class="form-control"
+                    type="text"
+                    formControlName="rfcProveedor">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="dirProveedor">Dirección:</label>
+                    <input 
+                    id="dirProveedor"
+                    name="dirProveedor"
+                    class="form-control"
+                    type="text"
+                    formControlName="dirProveedor">
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="row">
+        <hr>
+            <div class="col-md-6 border-top">
+                <div class="form-group form-inline">
+                    <label for="idProveedor">ID Proveedor:</label>
+                    <input 
+                    id="idProveedor"
+                    name="idProveedor"
+                    class="form-control"
+                    type="text"
+                    formControlName="idProveedor">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="idLicencia">Aviso de Funcionamiento / Licencia Sanitaria:</label>
+                    <button type="button" class="btn btn-primary">Subir archivo</button>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="responsableSanitario">Responsable Sanitario:</label>
+                    <select 
+                    name="responsableSanitario"
+                    id="responsableSanitario"
+                    class="form-control"
+                    formControlName="isResponsableSanitario">
+                        <option
+                        *ngFor="let responsable of responsableSanitario"
+                        [value]="responsable">{{ responsable }}</option>
+                    </select>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="utilizasMaquiladores">Utilizas Maquiladores para fabricar, empacar o
+                        almacenar tus productos:</label>
+                    <select 
+                    name="utilizasMaquiladores"
+                    id="utilizasMaquiladores"
+                    class="form-control"
+                    formControlName="utilizasMaquiladores"
+                    (select)="conocerValor()"
+                    >
+                        <option
+                        *ngFor="let opcionMaquiladores of opcionesMaquiladores; let i of index"
+                        [value]="opcionMaquiladores">{{ opcionMaquiladores }}</option>
+                    </select>
+                </div>
+                <div class="form-group form-inline">
+                    <button *ngIf="altaProveedorForm.controls['utilizasMaquiladores'].value === 'Sí'"
+                    class="btn btn-primary"
+                    routerLink="new">Agregar Maquiladora</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <app-listado-maquiladoras></app-listado-maquiladoras>
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-success" type="submit">Registrar</button>
+            </div>
+        </div>
+    </form>
 </div>

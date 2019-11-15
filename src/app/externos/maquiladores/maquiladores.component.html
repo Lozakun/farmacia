@@ -1,0 +1,68 @@
+<form [formGroup]="maquilaForm" ngSubmit="agregarMaquila()">
+    <div class="form-group form-inline">
+        <label for="nombreMaquila">Nombre Maquiladora:</label>
+        <input 
+        type="text"
+        id=nombreMaquila
+        name="nombreMaquila"
+        class="form-control"
+        formControlName="nombreMaquila">
+    </div>
+    <div class="form-group form-inline">
+        <label for="telMaquila">Telefóno:</label>
+        <input type="tel"
+        id="telMaquila"
+        name="telMaquila"
+        class="form-control"
+        formControlName="telMaquila">
+    </div>
+    <div class="form-group form-inline">
+        <label for="correoMaquila">Correo:</label>
+        <input type="email"
+        id="correoMaquila"
+        name="correoMaquila"
+        class="form-control"
+        formControlName="correoMaquila">
+    </div>
+    <div class="form-group form-inline">
+        <label for="rfcMaquila">RFC:</label>
+        <input type="text"
+        id="rfcMaquila"
+        name="rfcMaquila"
+        class="form-control"
+        formControlName="rfcMaquila">
+    </div>
+    <div class="form-group form-inline">
+        <label for="dirMaquila">Dirección:</label>
+        <textarea name="dirMaquila"
+        id="dirMaquila"
+        class="form-control"
+        cols="40"
+        rows="3"
+        formControlName="dirMaquila"
+        ></textarea>
+    </div>
+    <div class="form-group form-inline">
+        <label for="avisoFuncionamientoMaquiladora">Aviso de Funcionamiento/Licencia Sanitaria:</label>
+        <button class="btn btn-primary">Subir Archivo</button>
+    </div>
+    <div class="form-group form-inline">
+        <label for="responsableSanitarioMaquiladora">Responsable Sanitario:</label>
+        <select
+        id="responsableSanitarioMaquiladora"
+        name="responsableSanitarioMaquiladora"
+        class="form-control"
+        formControlName="responsableSanitarioMaquiladora">
+            <option 
+            *ngFor="let opcion of opcionesResponsableSanitario"
+            [value]="opcion">{{ opcion }}</option>
+        </select>
+    </div>
+    <div class="form-group form-inline">
+        <button 
+        class="btn btn-danger"
+        routerLink="../"
+        type="button">Cancel</button>
+        <button class="btn btn-warning" type="submit">Agregar</button>
+    </div>
+</form>

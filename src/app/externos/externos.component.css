@@ -1,0 +1,9 @@
+.container {
+    margin-top: 50px;
+    width: 100%;
+}
+
+div.col-md-6{
+    margin: 0;
+    padding: 0;
+}

@@ -1,7 +1,8 @@
 #footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     height: 150px;
+    margin-top: 1px;
     width: 100%;
     background: #007dc6;
 }

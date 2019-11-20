@@ -1,68 +1,77 @@
-<form [formGroup]="maquilaForm" ngSubmit="agregarMaquila()">
+<form [formGroup]="maquilaForm" (ngSubmit)="agregarMaquila()">
     <div class="form-group form-inline">
-        <label for="nombreMaquila">Nombre Maquiladora:</label>
+        <label class="col-5" for="nombreMaquila">Nombre Maquiladora:</label>
         <input 
         type="text"
         id=nombreMaquila
         name="nombreMaquila"
-        class="form-control"
+        class="form-control col-7"
         formControlName="nombreMaquila">
     </div>
     <div class="form-group form-inline">
-        <label for="telMaquila">Telefóno:</label>
+        <label class="col-5" for="telMaquila">Telefóno:</label>
         <input type="tel"
         id="telMaquila"
         name="telMaquila"
-        class="form-control"
+        class="form-control col-7"
         formControlName="telMaquila">
     </div>
     <div class="form-group form-inline">
-        <label for="correoMaquila">Correo:</label>
+        <label class="col-5" for="correoMaquila">Correo:</label>
         <input type="email"
         id="correoMaquila"
         name="correoMaquila"
-        class="form-control"
+        class="form-control col-7"
         formControlName="correoMaquila">
     </div>
     <div class="form-group form-inline">
-        <label for="rfcMaquila">RFC:</label>
+        <label class="col-5" for="rfcMaquila">RFC:</label>
         <input type="text"
         id="rfcMaquila"
         name="rfcMaquila"
-        class="form-control"
+        class="form-control col-7"
         formControlName="rfcMaquila">
     </div>
     <div class="form-group form-inline">
-        <label for="dirMaquila">Dirección:</label>
+        <label class="col-5" for="dirMaquila">Dirección:</label>
         <textarea name="dirMaquila"
         id="dirMaquila"
-        class="form-control"
+        class="form-control col-7"
         cols="40"
         rows="3"
         formControlName="dirMaquila"
         ></textarea>
     </div>
     <div class="form-group form-inline">
-        <label for="avisoFuncionamientoMaquiladora">Aviso de Funcionamiento/Licencia Sanitaria:</label>
+        <label class="col-5" for="avisoFuncionamientoMaquiladora">Aviso de Funcionamiento / Licencia Sanitaria:</label>
+        <input type="hidden" name="avisoFuncionamientoMaquiladora" id="avisoFuncionamientoMaquiladora" [value]="idAvisoFuncionamiento">
         <button class="btn btn-primary">Subir Archivo</button>
     </div>
     <div class="form-group form-inline">
-        <label for="responsableSanitarioMaquiladora">Responsable Sanitario:</label>
+        <label class="col-5" for="responsableSanitarioMaquiladora">Responsable Sanitario:</label>
         <select
         id="responsableSanitarioMaquiladora"
         name="responsableSanitarioMaquiladora"
-        class="form-control"
+        class="form-control col-3"
         formControlName="responsableSanitarioMaquiladora">
             <option 
             *ngFor="let opcion of opcionesResponsableSanitario"
             [value]="opcion">{{ opcion }}</option>
         </select>
+        <input type="hidden" name="responsableMaquilador" id="responsableMaquilador" [value]="idResponsableMaquilador">
+        <button 
+        *ngIf="maquilaForm.controls['responsableSanitarioMaquiladora'].value === 'Sí'"
+        class="btn btn-primary col-4"
+        type="button">Subir Archivo</button>
     </div>
     <div class="form-group form-inline">
+        <div class="col-2"></div>
         <button 
-        class="btn btn-danger"
+        class="btn btn-danger col-3"
         routerLink="../"
         type="button">Cancel</button>
-        <button class="btn btn-warning" type="submit">Agregar</button>
+        <div class="col-2"></div>
+        <button class="btn btn-warning col-3" type="submit">Agregar</button>
+        <div class="col-2"></div>
     </div>
 </form>

@@ -14,3 +14,7 @@ h1 {
     text-align: right;
     color: white;
 }
+
+.active {
+    background: orange;
+}

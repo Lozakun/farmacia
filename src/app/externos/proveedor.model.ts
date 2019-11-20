@@ -1,8 +1,8 @@
 import { Maquilador } from './maquilador.model';
 
 export class Proveedor {
+    public idProveedor: number;
     constructor(
-        public idProveedor: string,
         public nombre: string,
         public telefono: string,
         public correo: string,
@@ -10,5 +10,7 @@ export class Proveedor {
         public direccionProveedor: string,
         public responsableSanitario: boolean,
         public maquiladores: Maquilador[],
-        public idAvisoLicencia: string) {}
+        public idAvisoLicencia: string) {
+            this.idProveedor = Math.floor(Math.random() * (999999 - 1)) + 1;
+        }
 }

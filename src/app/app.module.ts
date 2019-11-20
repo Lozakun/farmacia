@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +14,8 @@ import { ListadoProductosComponent } from './listado-productos/listado-productos
 import { EstadoSolicitudesComponent } from './estado-solicitudes/estado-solicitudes.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaquiladoresComponent } from './externos/maquiladores/maquiladores.component';
-import { ListadoMaquiladorasComponent } from './listado-maquiladoras/listado-maquiladoras.component';
+import { ListadoMaquiladorasComponent } from './externos/listado-maquiladoras/listado-maquiladoras.component';
+import { ProveedorService } from './externos/proveedor.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { ListadoMaquiladorasComponent } from './listado-maquiladoras/listado-maq
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ProveedorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

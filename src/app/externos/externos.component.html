@@ -5,52 +5,52 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group form-inline">
-                    <label for="nombreProveedor">Nombre Proveedor:</label>
+                    <label class="col-5" for="nombreProveedor">Nombre Proveedor:</label>
                     <input 
                     id="nombreProveedor"
                     name="nombreProveedor"
-                    class="form-control"
+                    class="form-control col-7"
                     type="text"
                     formControlName="nombreProveedor">
                 </div>
                 <div class="form-group form-inline">
-                    <label for="telProveedor">Telefono Proveedor:</label>
+                    <label class="col-5" for="telProveedor">Telefono Proveedor:</label>
                     <input 
                     id="telProveedor"
-                    class="form-control"
+                    class="form-control col-7"
                     name="telProveedor"
                     formControlName="telProveedor"
                     type="number"
                     maxlength="10">
                 </div>
                 <div class="form-group form-inline">
-                    <label for="mailProveedor">Correo Proveedor:</label>
+                    <label class="col-5" for="mailProveedor">Correo Proveedor:</label>
                     <input 
                     id="mailProveedor"
                     name="mailProveedor"
-                    class="form-control"
+                    class="form-control col-7"
                     type="email"
                     formControlName="mailProveedor">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group form-inline">
-                    <label for="rfcProveedor">RFC:</label>
+                    <label class="col-5" for="rfcProveedor">RFC:</label>
                     <input 
                     id="rfcProveedor"
                     name="rfcProveedor"
-                    class="form-control"
+                    class="form-control col-7"
                     type="text"
                     formControlName="rfcProveedor">
                 </div>
                 <div class="form-group form-inline">
-                    <label for="dirProveedor">Dirección:</label>
-                    <input 
+                    <label class="col-5" for="dirProveedor">Dirección:</label>
+                    <textarea 
                     id="dirProveedor"
                     name="dirProveedor"
-                    class="form-control"
+                    class="form-control col-7"
                     type="text"
-                    formControlName="dirProveedor">
+                    formControlName="dirProveedor"></textarea>
                 </div>
             </div>
         </div>
@@ -58,24 +58,24 @@
         <hr>
             <div class="col-md-6 border-top">
                 <div class="form-group form-inline">
-                    <label for="idProveedor">ID Proveedor:</label>
+                    <label for="idProveedor" class="col-5">ID Proveedor:</label>
                     <input 
                     id="idProveedor"
                     name="idProveedor"
-                    class="form-control"
+                    class="form-control col-7"
                     type="text"
                     formControlName="idProveedor">
                 </div>
                 <div class="form-group form-inline">
-                    <label for="idLicencia">Aviso de Funcionamiento / Licencia Sanitaria:</label>
-                    <button type="button" class="btn btn-primary">Subir archivo</button>
+                    <label class="col-5" for="idLicencia">Aviso de Funcionamiento / Licencia Sanitaria:</label>
+                    <button class="col-7" type="button" class="btn btn-primary">Subir archivo</button>
                 </div>
                 <div class="form-group form-inline">
-                    <label for="responsableSanitario">Responsable Sanitario:</label>
+                    <label class="col-5" for="responsableSanitario">Responsable Sanitario:</label>
                     <select 
                     name="responsableSanitario"
                     id="responsableSanitario"
-                    class="form-control"
+                    class="form-control col-7"
                     formControlName="isResponsableSanitario">
                         <option
                         *ngFor="let responsable of responsableSanitario"
@@ -83,12 +83,12 @@
                     </select>
                 </div>
                 <div class="form-group form-inline">
-                    <label for="utilizasMaquiladores">Utilizas Maquiladores para fabricar, empacar o
+                    <label class="col-5" for="utilizasMaquiladores">Utilizas Maquiladores para fabricar, empacar o
                         almacenar tus productos:</label>
                     <select 
                     name="utilizasMaquiladores"
                     id="utilizasMaquiladores"
-                    class="form-control"
+                    class="form-control col-7"
                     formControlName="utilizasMaquiladores"
                     (select)="conocerValor()"
                     >
@@ -102,6 +102,9 @@
                     class="btn btn-primary"
                     routerLink="new">Agregar Maquiladora</button>
                 </div>
+                <div *ngFor="let maquila of proveedor.maquiladores; let i of index">
+                    <app-listado-maquiladoras [(maquila)] = "maquila"></app-listado-maquiladoras>
+                </div>
             </div>
             <div class="col-md-6">
                 <router-outlet></router-outlet>
@@ -109,7 +112,6 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <app-listado-maquiladoras></app-listado-maquiladoras>
             </div>
             <div class="col-md-6">
             </div>

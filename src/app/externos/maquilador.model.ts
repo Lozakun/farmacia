@@ -1,6 +1,6 @@
 export class Maquilador {
+
     constructor(
-        public idMaquilador: number,
         public nombre: string,
         public telefono: string,
         public correo: string,

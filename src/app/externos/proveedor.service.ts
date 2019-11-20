@@ -1,7 +1,16 @@
 import { Proveedor } from './proveedor.model';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Maquilador } from './maquilador.model';
 
+@Injectable({providedIn: 'root'})
 export class ProveedorService {
-    constructor(public proveedores: Proveedor[]) {}
+
+    provTemporal: Proveedor;
+    nuevoMaquilador = new Subject<Maquilador>();
+    private proveedores: Proveedor[];
+
+    constructor() {}
 
     getProveedores() {
         return this.proveedores;
@@ -18,4 +27,5 @@ export class ProveedorService {
     getProveedor(provId: number) {
         return this.proveedores.find((prov) => provId === +prov.idProveedor);
     }
+
 }

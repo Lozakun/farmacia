@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { Maquilador } from '../maquilador.model';
+import { Proveedor } from '../proveedor.model';
+import { ProveedorService } from '../proveedor.service';
 
 @Component({
   selector: 'app-maquiladores',
@@ -7,7 +11,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./maquiladores.component.css']
 })
 export class MaquiladoresComponent implements OnInit {
-
+  @Input() proveedor: Proveedor;
+  maquila: Maquilador;
   maquilaForm: FormGroup;
   nombreMaquila: FormControl;
   telMaquila: FormControl;
@@ -16,10 +21,14 @@ export class MaquiladoresComponent implements OnInit {
   dirMaquila: FormControl;
   responsableSanitarioMaquiladora: FormControl;
   opcionesResponsableSanitario = ['Sí', 'No'];
+  idResponsableMaquilador = 'asdfgqwert12345z';
+  idAvisoFuncionamiento = 'asdfgqwert12345x';
 
-  constructor() { }
+  constructor(private provService: ProveedorService) { }
 
   ngOnInit() {
+    this.maquila = new Maquilador('', '', '', '', '', null, 'No', null);
+
     this.maquilaForm = new FormGroup({
       nombreMaquila: new FormControl(null, Validators.required),
       telMaquila: new FormControl(null, Validators.required),
@@ -31,7 +40,26 @@ export class MaquiladoresComponent implements OnInit {
   }
 
   agregarMaquila() {
-    console.log('agregar registro de maquila!');
+    // tslint:disable-next-line:no-string-literal
+    this.maquila = {
+      nombre: this.maquilaForm.controls['nombreMaquila'].value,
+      telefono: this.maquilaForm.controls['telMaquila'].value,
+      correo: this.maquilaForm.controls['correoMaquila'].value,
+      rfcMaquilador: this.maquilaForm.controls['rfcMaquila'].value,
+      direccionMaquilador: this.maquilaForm.controls['dirMaquila'].value,
+      responsableMaquilador: this.maquilaForm.controls['responsableSanitarioMaquiladora'].value,
+      idResponsableMaquilador: this.idResponsableMaquilador,
+      idAvisoFuncionamientoMaquilador: this.idAvisoFuncionamiento
+    };
+    this.provService.nuevoMaquilador.next(this.maquila);
+    this.maquilaForm.reset({
+      nombreMaquila: null,
+      telMaquila: null,
+      correoMaquila: null,
+      rfcMaquila: null,
+      dirMaquila: null,
+      responsableSanitarioMaquiladora: 'No'
+    });
   }
 
 }

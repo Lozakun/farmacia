@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Maquilador } from '../maquilador.model';
 
 @Component({
   selector: 'app-listado-maquiladoras',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListadoMaquiladorasComponent implements OnInit {
 
+  @Input() maquila: Maquilador;
   constructor() { }
 
   ngOnInit() {

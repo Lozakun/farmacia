@@ -1,1 +1,242 @@
-<p>proveedor-farmacia works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>{{ proveedor.nombre }}</h1>
+            <h4 class="border-bottom">Registro de Producto</h4>
+        </div>
+        </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group form-inline">
+                <label class="col-5" for="tipoProducto">Producto:</label>
+                <select 
+                class="form-control col-7"
+                name="tipoProducto"
+                id="tipoProducto"
+                [(ngModel)]="tipoProducto">
+                    <option *ngFor="let tipo of tiposProducto"
+                    [value]="tipo"
+                    >{{ tipo }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <form *ngIf="tipoProducto === 'Medicamento'" [formGroup]="registroMedicamentoForm" (ngSubmit)="registraMedicamento()">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="border-bottom">Datos del Medicamento</h4>
+                <div class="form-group form-inline">
+                    <label class="col-5" for="nombreProducto">Nombre:</label>
+                    <input 
+                    id="nombreProducto"
+                    class="form-control col-7"
+                    type="text"
+                    formControlName="nombreProducto">
+                </div>
+                <div class="form-group form-inline">
+                    <label class="col-5" for="presentacion">Presentación:</label>
+                    <input type="text"
+                    id="presentacion"
+                    class="form-control col-7"
+                    formControlName="presentacion">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="principioActivo" class="col-5">Principio Activo:</label>
+                    <input id="principioActivo" 
+                    type="text"
+                    class="form-control col-7"
+                    formControlName="principioActivo">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="vigenciaRegistro" class="col-5">Vigencia Registro:</label>
+                    <input type="date" 
+                    class="form-control col-7"
+                    formControlName="vigenciaRegistro">
+                </div>
+                <div class="form-group form-inline">
+                    <label class="col-5" for="plantaProcesamiento">Planta de Procesamiento:</label>
+                    <select name="plantaProcesamiento"
+                    id="plantaProcesamiento"
+                    class="form-control col-7"
+                    formControlName="planta">
+                        <option *ngFor="let planta of plantaProcesamiento"
+                        value="planta.nombre">{{ planta.nombre }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4 class="border-bottom">Documentación Solicitada</h4>
+                <div class="form-group form-inline">
+                    <label for="" class="col-5">Registro Sanitario:</label>
+                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>          
+                </div>
+                <div class="form-group form-inline">
+                    <label for="" class="col-5">Prorroga del Registro Sanitario:</label>
+                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>          
+                </div>
+                <div class="form-group form-inline">
+                    <label for="" class="col-5">Conclusión Estabilidad a Largo Plazo:</label>
+                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>          
+                </div>
+                <div class="form-group form-inline">
+                    <label for="" class="col-5">Revisión Anual del Producto:</label>
+                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>          
+                </div>
+            </div>    
+        </div>
+        <div class="row">
+                <div class="col-5"></div>
+                <button type="submit" class="btn btn-success col-2">Registrar</button>
+                <div class="col-5"></div>
+        </div>
+    </form>
+
+    <form *ngIf="tipoProducto === 'Suplemento Alimenticio'" [formGroup]="suplementoForm" (ngSubmit)="agregarSuplemento()">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="border-bottom">Datos del Suplemento</h4>
+                <div class="form-group form-inline">
+                    <label for="nombreSuplemento" class="col-5">Nombre:</label>
+                    <input id="nombreSuplemento"
+                    type="text"
+                    class="form-control col-7"
+                    formControlName="nombreSuplemento">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="presentacion" class="col-5">Presentación:</label>
+                    <input type="text"
+                    id=presentacion
+                    class="form-control col-7"
+                    formControlName="presentacion">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="plantaSup" class="col-5">Planta de Procesamiento:</label>
+                    <select name="plantaSup"
+                    id="plantaSup"
+                    class="form-control col-7"
+                    formControlName="plantaSup">
+                        <option *ngFor="let planta of proveedor.maquiladores" 
+                        value="planta">{{ planta.nombre }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4 class="border-bottom">
+                    Documentación Solicitada
+                </h4>
+                <div class="form-group form-inline">
+                    <label for="" class="col-5">Oficio de Clasificación:</label>
+                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5"></div>
+            <button type="submit" class="btn btn-success col-2">Registrar</button>
+            <div class="col-5"></div>
+        </div>
+    </form>
+
+    <form *ngIf="tipoProducto === 'Dispositivo Medico'" [formGroup]="dispositivoForm" (ngSubmit)="agregarDispositivo()">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="border-bottom">Datos del Dispositivo</h4>
+                <div class="form-group form-inline">
+                    <label for="nombreDisp" class="col-5">Nombre:</label>
+                    <input type="text"
+                    id="nombreDisp"
+                    class="form-control col-7"
+                    formControlName="nombreDispositivo">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="presentacion" class="col-5">Presentación:</label>
+                    <input type="text"
+                    id="presentacion"
+                    class="form-control col-7"
+                    formControlName="presentacion">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="plantaDisp" class="col-5">Planta de Procesamiento:</label>
+                    <select name="plantaDisp"
+                    id="plantaDisp"
+                    class="form-control col-7"
+                    formControlName="plantaDisp">
+                        <option *ngFor="let planta of proveedor.maquiladores"
+                        value="planta">{{ planta.nombre }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4 class="border-bottom">
+                    Documentación Solicitada
+                </h4>
+                <div class="form-group form-inline">
+                    <label class="col-5">Registro Sanitario:</label>
+                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="vigenciaRegistro" class="col-5">Vigencia Registro:</label>
+                    <input type="date" class="form-control col-7"
+                    formControlName="vigenciaRegSanitario">
+                </div>
+                <div class="form-group form-inline">
+                    <label class="col-5">Prorroga del Registro Sanitario:</label>
+                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                </div>
+                <div class="form-group form-inline">
+                    <label class="col-5">Oficio COFEPRIS de exención de Registro Sanitario</label>
+                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5"></div>
+            <button type="submit" class="btn btn-success col-2">Registrar</button>
+            <div class="col-5"></div>
+        </div>
+    </form>
+
+    <form *ngIf="tipoProducto === 'Cosmético'" [formGroup]="cosmeticoForm" (ngSubmit)="agregarCosmetico()">
+        <div class="row">
+            <div class="col-md-6">
+                <h4 class="border-bottom">Datos del Cosmético</h4>
+                <div class="form-group form-inline">
+                    <label for="nombreCosmetico" class="col-5">Nombre:</label>
+                    <input type="text"
+                    id="nombreCosmetico"
+                    class="form-control col-7"
+                    formControlName="nombreCosmetico">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="presentacion" class="col-5">Presentación:</label>
+                    <input type="text"
+                    id="presentacion"
+                    class="form-control col-7"
+                    formControlName="presentacion">
+                </div>
+                <div class="form-group form-inline">
+                    <label for="plantaCosm" class="col-5">Planta de Procesamiento:</label>
+                    <select name="plantaCosm"
+                    id="plantaCosm"
+                    class="form-control col-7"
+                    formControlName="plantaCosm">
+                        <option *ngFor="let planta of proveedor.maquiladores"
+                        value="planta">{{ planta.nombre }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4 class="border-bottom">Documentación Solicitada</h4>
+                <div class="form-group form-inline">
+                    <label class="col-5">Revisión Anual del Producto:</label>
+                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5"></div>
+            <button type="submit" class="btn btn-success col-2">Registrar</button>
+            <div class="col-5"></div>
+        </div>
+    </form>
+</div>

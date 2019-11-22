@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Maquilador } from '../maquilador.model';
+import { Maquilador } from '../../shared/maquilador.model';
 
 @Component({
   selector: 'app-listado-maquiladoras',

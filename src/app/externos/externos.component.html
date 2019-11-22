@@ -4,6 +4,11 @@
     (ngSubmit)='guardarProveedor()'>
         <div class="row">
             <div class="col-md-6">
+                <h1 class="border-bottom">Alta de Proveedor</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group form-inline">
                     <label class="col-5" for="nombreProveedor">Nombre Proveedor:</label>
                     <input 
@@ -56,7 +61,7 @@
         </div>
         <div class="row">
         <hr>
-            <div class="col-md-6 border-top">
+            <div class="col-md-6">
                 <div class="form-group form-inline">
                     <label for="idProveedor" class="col-5">ID Proveedor:</label>
                     <input 
@@ -89,16 +94,14 @@
                     name="utilizasMaquiladores"
                     id="utilizasMaquiladores"
                     class="form-control col-7"
-                    formControlName="utilizasMaquiladores"
-                    (select)="conocerValor()"
-                    >
+                    formControlName="utilizasMaquiladores">
                         <option
                         *ngFor="let opcionMaquiladores of opcionesMaquiladores; let i of index"
                         [value]="opcionMaquiladores">{{ opcionMaquiladores }}</option>
                     </select>
                 </div>
                 <div class="form-group form-inline">
-                    <button *ngIf="altaProveedorForm.controls['utilizasMaquiladores'].value === 'Sí'"
+                    <button type="button" *ngIf="altaProveedorForm.controls['utilizasMaquiladores'].value === 'Sí'"
                     class="btn btn-primary"
                     routerLink="new">Agregar Maquiladora</button>
                 </div>

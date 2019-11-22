@@ -12,10 +12,10 @@ import { ProveedorFarmaciaComponent } from './proveedor-farmacia/proveedor-farma
 import { RegistroProductosComponent } from './registro-productos/registro-productos.component';
 import { ListadoProductosComponent } from './listado-productos/listado-productos.component';
 import { EstadoSolicitudesComponent } from './estado-solicitudes/estado-solicitudes.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaquiladoresComponent } from './externos/maquiladores/maquiladores.component';
 import { ListadoMaquiladorasComponent } from './externos/listado-maquiladoras/listado-maquiladoras.component';
-import { ProveedorService } from './externos/proveedor.service';
+import { ProveedorService } from './proveedor.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { ProveedorService } from './externos/proveedor.service';
     NgbModule,
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [ProveedorService],
   bootstrap: [AppComponent]

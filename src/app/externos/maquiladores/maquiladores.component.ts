@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Maquilador } from '../maquilador.model';
-import { Proveedor } from '../proveedor.model';
-import { ProveedorService } from '../proveedor.service';
+import { Maquilador } from '../../shared/maquilador.model';
+import { Proveedor } from '../../shared/proveedor.model';
+import { ProveedorService } from '../../proveedor.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-maquiladores',
@@ -24,7 +25,7 @@ export class MaquiladoresComponent implements OnInit {
   idResponsableMaquilador = 'asdfgqwert12345z';
   idAvisoFuncionamiento = 'asdfgqwert12345x';
 
-  constructor(private provService: ProveedorService) { }
+  constructor(private provService: ProveedorService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.maquila = new Maquilador('', '', '', '', '', null, 'No', null);
@@ -42,12 +43,12 @@ export class MaquiladoresComponent implements OnInit {
   agregarMaquila() {
     // tslint:disable-next-line:no-string-literal
     this.maquila = {
-      nombre: this.maquilaForm.controls['nombreMaquila'].value,
-      telefono: this.maquilaForm.controls['telMaquila'].value,
-      correo: this.maquilaForm.controls['correoMaquila'].value,
-      rfcMaquilador: this.maquilaForm.controls['rfcMaquila'].value,
-      direccionMaquilador: this.maquilaForm.controls['dirMaquila'].value,
-      responsableMaquilador: this.maquilaForm.controls['responsableSanitarioMaquiladora'].value,
+      nombre: this.maquilaForm.controls.nombreMaquila.value,
+      telefono: this.maquilaForm.controls.telMaquila.value,
+      correo: this.maquilaForm.controls.correoMaquila.value,
+      rfcMaquilador: this.maquilaForm.controls.rfcMaquila.value,
+      direccionMaquilador: this.maquilaForm.controls.dirMaquila.value,
+      responsableMaquilador: this.maquilaForm.controls.responsableSanitarioMaquiladora.value,
       idResponsableMaquilador: this.idResponsableMaquilador,
       idAvisoFuncionamientoMaquilador: this.idAvisoFuncionamiento
     };
@@ -60,6 +61,7 @@ export class MaquiladoresComponent implements OnInit {
       dirMaquila: null,
       responsableSanitarioMaquiladora: 'No'
     });
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
 }

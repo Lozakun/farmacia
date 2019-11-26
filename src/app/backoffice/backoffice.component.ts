@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Proveedor } from '../shared/proveedor.model';
+import { ProveedorService } from '../proveedor.service';
+
 @Component({
   selector: 'app-backoffice',
   templateUrl: './backoffice.component.html',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BackofficeComponent implements OnInit {
 
-  constructor() { }
+  proveedores: Proveedor[];
+  
+  constructor(private provServ: ProveedorService) { }
 
   ngOnInit() {
+    this.proveedores = this.provServ.getProveedores();
   }
 
 }

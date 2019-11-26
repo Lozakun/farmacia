@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FiltrosComponent implements OnInit {
 
+  estados = ['Por Aprobar', 'Activo'];
+  respUtilitarios = ['Sí', 'No'];
+
   constructor() { }
 
   ngOnInit() {

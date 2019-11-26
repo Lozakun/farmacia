@@ -30,12 +30,14 @@ export class ExternosComponent implements OnInit {
   constructor(private provService: ProveedorService) { }
 
   ngOnInit() {
+
     this.proveedor = new Proveedor('', '', '', '', '', 'No Aplica', 'No aplica', [], [], [], [], [], '', false);
     // this.prov.createProveedorTemporal(this.proveedor);
     this.iniciarForma();
-
+    console.log(this.proveedor);
     this.provService.nuevoMaquilador.subscribe((maquilador) => {
       this.proveedor.maquiladores.push(maquilador);
+      console.log(this.proveedor);
     });
   }
 

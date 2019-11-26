@@ -1,3 +1,7 @@
 .container{
     min-height: 28rem;
 }
+
+.table-bordered {
+    border: none;
+}

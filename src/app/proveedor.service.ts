@@ -8,7 +8,7 @@ export class ProveedorService {
 
     provTemporal: Proveedor;
     nuevoMaquilador = new Subject<Maquilador>();
-    private proveedores: Proveedor[] = [
+    public proveedores: Proveedor[] = [
         {
             idProveedor: 234243,
             nombre: 'Proveedor Prueba',

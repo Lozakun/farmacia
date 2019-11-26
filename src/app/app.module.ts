@@ -16,6 +16,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MaquiladoresComponent } from './externos/maquiladores/maquiladores.component';
 import { ListadoMaquiladorasComponent } from './externos/listado-maquiladoras/listado-maquiladoras.component';
 import { ProveedorService } from './proveedor.service';
+import { FiltrosComponent } from './backoffice/filtros/filtros.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ProveedorService } from './proveedor.service';
     ListadoProductosComponent,
     EstadoSolicitudesComponent,
     MaquiladoresComponent,
-    ListadoMaquiladorasComponent
+    ListadoMaquiladorasComponent,
+    FiltrosComponent
   ],
   imports: [
     NgbModule,

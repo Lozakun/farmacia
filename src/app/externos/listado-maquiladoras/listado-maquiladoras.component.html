@@ -1,6 +1,8 @@
 <div class="list-group">
-    <div class="list-group-item" style="cursor: pointer;">
-        <h3>{{ maquila.nombre  }}</h3>
-        <p>{{ maquila.rfcMaquilador }}</p>
-    </div>
+    <a (click)="mostrarMaquila(i)">
+        <div class="list-group-item" style="cursor: pointer;">
+            <h3>{{ maquila.nombre  }}</h3>
+            <p>{{ maquila.rfcMaquilador }}</p>
+        </div>
+    </a>
 </div>

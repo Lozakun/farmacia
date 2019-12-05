@@ -4,24 +4,33 @@
             <h1 class="border-bottom">Consultas</h1>
         </div>
     </div>
-    <form>
+    <form [formGroup]="filtrosForm" (ngSubmit)="buscarProveedores()">
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group form-inline">
                     <label class="col-5" for="nombre"><strong>Nombre:</strong></label>
-                    <input id="nombre" type="text" class="form-control col-7">
+                    <input id="nombre" 
+                    type="text" 
+                    class="form-control col-7"
+                    formControlName="nombre">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
                     <label class="col-5" for="idProveedor"><strong>ID Proveedor:</strong></label>
-                    <input id="idProveedor" type="text" class="form-control col-7">
+                    <input id="idProveedor"
+                    type="text"
+                    class="form-control col-7"
+                    formControlName="idProveedor">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group form-inline">
                     <label class="col-5" for="rfcProveedor"><strong>RFC Proveedor:</strong></label>
-                    <input id="rfcProveedor" type="text" class="form-control col-7">
+                    <input id="rfcProveedor" 
+                    type="text" 
+                    class="form-control col-7"
+                    formControlName="rfcProveedor">
                 </div>
             </div>
         </div>
@@ -31,9 +40,11 @@
                     <label class="col-5" for="estado"><strong>Estado:</strong></label>
                     <select 
                     class="form-control col-7"
-                    name="estado" id="estado">
+                    name="estado" 
+                    id="estado"
+                    formControlName="estado">
                         <option *ngFor="let edo of estados"
-                        value="edo">{{ edo }}</option>
+                        [value]="edo">{{ edo }}</option>
                     </select>
                 </div>
             </div>
@@ -42,9 +53,11 @@
                     <label class="col-5" for="respUtilitario"><strong>Responsable Sanitario:</strong></label>
                     <select 
                     class="form-control col-7"
-                    name="respUtilitario" id="respUtilitario">
-                        <option *ngFor="let resp of respUtilitarios"
-                        value="resp">{{ resp }}</option>
+                    name="respUtilitario"
+                    id="respUtilitario"
+                    formControlName="responsableSanitario">
+                        <option *ngFor="let resp of respSanitario"
+                        [value]="resp">{{ resp }}</option>
                     </select>
                 </div>
             </div>
@@ -58,7 +71,8 @@
             <div class="col-md-4">
                 <div class="col-7"></div>
                 <div class="col-5 float-right">
-                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <button type="submit" 
+                    class="btn btn-primary">Buscar</button>
                 </div>
             </div>
         </div>

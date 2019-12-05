@@ -11,3 +11,16 @@ h1 {
 h4 {
     color: rgb(117, 117, 117);
 }
+
+
+div.input-group.col-7{
+    padding: 0px;
+}
+
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+    content: "Elegir";
+}
+
+.form-inline label {
+    justify-content: left;
+}

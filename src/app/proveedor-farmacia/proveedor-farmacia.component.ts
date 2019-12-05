@@ -6,6 +6,7 @@ import { Medicamento } from '../shared/medicamento.model';
 import { Suplemento } from '../shared/suplemento.model';
 import { Dispositivo } from '../shared/dispositivo.model';
 import { Cosmetico } from '../shared/cosmetico.model';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-proveedor-farmacia',
@@ -26,6 +27,7 @@ export class ProveedorFarmaciaComponent implements OnInit {
   tiposProducto = ['Medicamento', 'Suplemento Alimenticio', 'Dispositivo Medico', 'Cosmético'];
   plantaProcesamiento = [];
   tipoProducto: string;
+  date: NgbDate;
   diaActual = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 
   constructor(private provService: ProveedorService) { }
@@ -41,7 +43,7 @@ export class ProveedorFarmaciaComponent implements OnInit {
 
   registraMedicamento() {
     this.medicamento = new Medicamento(this.registroMedicamentoForm.get('nombreProducto').value, this.registroMedicamentoForm.get('presentacion').value,
-    this.registroMedicamentoForm.get('principioActivo').value, this.registroMedicamentoForm.get('vigenciaRegistro').value,
+    this.registroMedicamentoForm.get('principioActivo').value, this.registroMedicamentoForm.get('vigenciaRegSanitario').value,
     this.registroMedicamentoForm.get('planta').value, '1234', '4321', '9977', '2329');
     this.proveedor.medicamentos.push(this.medicamento);
     console.log(this.proveedor);
@@ -74,7 +76,8 @@ export class ProveedorFarmaciaComponent implements OnInit {
       nombreProducto: new FormControl('', Validators.required),
       presentacion: new FormControl('', Validators.required),
       principioActivo: new FormControl('', Validators.required),
-      vigenciaRegistro: new FormControl(this.diaActual.toDateString(), Validators.required),
+      // vigenciaRegSanitario: new FormControl(this.diaActual.toDateString(), Validators.required),
+      vigenciaRegSanitario: new FormControl(this.diaActual.toDateString(), Validators.required),
       planta: new FormControl(this.plantaProcesamiento[0].nombre, Validators.required)
     });
   }
@@ -102,6 +105,30 @@ export class ProveedorFarmaciaComponent implements OnInit {
       presentacion: new FormControl('', Validators.required),
       plantaCosm: new FormControl(this.proveedor.maquiladores[0].nombre, Validators.required)
     });
+  }
+
+  onCargarRegistroSanitario() {
+    console.log('cargando registro sanitario...');
+  }
+
+  onCargarProrrogaRegistro() {
+    console.log('cargando prorroga de registro sanitario...');
+  }
+
+  onCargarConclusionEstabilidad() {
+    console.log('cargando conclusión de estabilidad...');
+  }
+
+  onCargarRevisionAnual() {
+    console.log('cargando Revisión anual...');
+  }
+
+  onCargarOficioClasificacion() {
+    console.log('Cargando Oficio de Clasificación...');
+  }
+
+  onCargarOficioCofepris() {
+    console.log('Cargando Oficio de Cofepris...');
   }
 
 }

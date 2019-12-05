@@ -73,7 +73,15 @@
                 </div>
                 <div class="form-group form-inline">
                     <label class="col-5" for="idLicencia">Aviso de Funcionamiento / Licencia Sanitaria:</label>
-                    <button class="col-7" type="button" class="btn btn-primary">Subir archivo</button>
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarLicencia" aria-describedby="inputGroupFileAddon04">
+                          <label class="custom-file-label" for="cargarLicencia">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                          <button class="btn btn-primary" type="button" id="inputGroupFileAddon04">Cargar</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group form-inline">
                     <label class="col-5" for="responsableSanitario">Responsable Sanitario:</label>
@@ -103,10 +111,10 @@
                 <div class="form-group form-inline">
                     <button type="button" *ngIf="altaProveedorForm.controls['utilizasMaquiladores'].value === 'Sí'"
                     class="btn btn-primary"
-                    routerLink="new">Agregar Maquiladora</button>
+                    [routerLink]="['maquila']">Agregar Maquiladora</button>
                 </div>
                 <div *ngFor="let maquila of proveedor.maquiladores; let i of index">
-                    <app-listado-maquiladoras [(maquila)] = "maquila"></app-listado-maquiladoras>
+                    <app-listado-maquiladoras [(maquila)] = "maquila" [i]="i"></app-listado-maquiladoras>
                 </div>
             </div>
             <div class="col-md-6">

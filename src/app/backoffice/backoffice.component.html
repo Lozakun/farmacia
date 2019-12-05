@@ -16,7 +16,7 @@
             </thead>
             <tbody>
                     <tr *ngFor="let proveedor of proveedores">
-                        <td><a href="#">Seleccionar</a></td>
+                        <td><a [routerLink]="['/externos/', proveedor.idProveedor]">Seleccionar</a></td>
                         <td>{{ proveedor.nombre }}</td>
                         <td>{{ proveedor.rfcProveedor }}</td>
                         <td>{{ proveedor.idProveedor }}</td>

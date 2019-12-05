@@ -49,9 +49,16 @@
                 </div>
                 <div class="form-group form-inline">
                     <label for="vigenciaRegistro" class="col-5">Vigencia Registro:</label>
-                    <input type="date" 
-                    class="form-control col-7"
-                    formControlName="vigenciaRegistro">
+                    <div class="input-group col-7">
+                        <input type="text" class="form-control" ngbDatepicker #d="ngbDatepicker"
+                        formControlName="vigenciaRegSanitario" aria-describedby="fechaVigencia">
+                        <div class="input-group-append">
+                            <button type="button" 
+                            class="btn btn-primary" 
+                            id="fechaVigencia"
+                            (click)="d.toggle()">Selecciona</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group form-inline">
                     <label class="col-5" for="plantaProcesamiento">Planta de Procesamiento:</label>
@@ -68,19 +75,63 @@
                 <h4 class="border-bottom">Documentación Solicitada</h4>
                 <div class="form-group form-inline">
                     <label for="" class="col-5">Registro Sanitario:</label>
-                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>          
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarRegistro" aria-describedby="cargarRegSanitario">
+                          <label class="custom-file-label" for="cargarRegistro">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" 
+                            type="button" 
+                            id="cargarRegSanitario"
+                            (click)="onCargarRegistroSanitario()">Cargar</button>
+                        </div>
+                    </div>          
                 </div>
                 <div class="form-group form-inline">
                     <label for="" class="col-5">Prorroga del Registro Sanitario:</label>
-                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>          
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarProrroga" aria-describedby="cargarProrrRegSanitario">
+                          <label class="custom-file-label" for="cargarProrroga">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" 
+                            type="button" 
+                            id="cargarProrrRegSanitario"
+                            (click)="onCargarProrrogaRegistro()">Cargar</button>
+                        </div>
+                    </div>          
                 </div>
                 <div class="form-group form-inline">
                     <label for="" class="col-5">Conclusión Estabilidad a Largo Plazo:</label>
-                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>          
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarConclusion" aria-describedby="cargarConclusionEstabilidad">
+                          <label class="custom-file-label" for="cargarConclusion">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" 
+                            type="button" 
+                            id="cargarConclusionEstabilidad"
+                            (click)="onCargarConclusionEstabilidad()">Cargar</button>
+                        </div>
+                    </div>          
                 </div>
                 <div class="form-group form-inline">
                     <label for="" class="col-5">Revisión Anual del Producto:</label>
-                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>          
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarRevision" aria-describedby="cargarRevisionAnual">
+                          <label class="custom-file-label" for="cargarRevision">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" 
+                            type="button" 
+                            id="cargarRevisionAnual"
+                            (click)="onCargarRevisionAnual()">Cargar</button>
+                        </div>
+                    </div>    
                 </div>
             </div>    
         </div>
@@ -126,7 +177,18 @@
                 </h4>
                 <div class="form-group form-inline">
                     <label for="" class="col-5">Oficio de Clasificación:</label>
-                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarOficio" aria-describedby="cargarOficioClas">
+                          <label class="custom-file-label" for="cargarOficio">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" 
+                            type="button" 
+                            id="cargarOficioClas"
+                            (click)="onCargarOficioClasificacion()">Cargar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -172,20 +234,61 @@
                 </h4>
                 <div class="form-group form-inline">
                     <label class="col-5">Registro Sanitario:</label>
-                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarRegistro" aria-describedby="cargarRegistroSanitario">
+                          <label class="custom-file-label" for="cargarRegistro">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" 
+                            type="button" 
+                            id="cargarRegistroSanitario"
+                            (click)="onCargarRegistroSanitario()">Cargar</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group form-inline">
                     <label for="vigenciaRegistro" class="col-5">Vigencia Registro:</label>
-                    <input type="date" class="form-control col-7"
-                    formControlName="vigenciaRegSanitario">
+                    <div class="input-group col-7">
+                        <input type="text" class="form-control" ngbDatepicker #d="ngbDatepicker"
+                        formControlName="vigenciaRegSanitario" aria-describedby="fechaVigencia">
+                        <div class="input-group-append">
+                            <button type="button" 
+                            class="btn btn-primary" 
+                            id="fechaVigencia"
+                            (click)="d.toggle()">Selecciona</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group form-inline">
                     <label class="col-5">Prorroga del Registro Sanitario:</label>
-                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarProrroga" aria-describedby="cargarProrrRegSanitario">
+                          <label class="custom-file-label" for="cargarProrroga">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" 
+                            type="button" 
+                            id="cargarProrrRegSanitario"
+                            (click)="onCargarProrrogaRegistro()">Cargar</button>
+                        </div>
+                    </div>      
                 </div>
                 <div class="form-group form-inline">
                     <label class="col-5">Oficio COFEPRIS de exención de Registro Sanitario</label>
-                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarOficio" aria-describedby="cargarOficioCofepris">
+                          <label class="custom-file-label" for="cargarOficio">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" 
+                            type="button" 
+                            id="cargarOficioCofepris"
+                            (click)="onCargarOficioCofepris()">Cargar</button>
+                        </div>
+                    </div>      
                 </div>
             </div>
         </div>
@@ -229,7 +332,18 @@
                 <h4 class="border-bottom">Documentación Solicitada</h4>
                 <div class="form-group form-inline">
                     <label class="col-5">Revisión Anual del Producto:</label>
-                    <button type="button" class="btn btn-primary col-7">Subir Archivo</button>
+                    <div class="input-group col-7">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="cargarRevision" aria-describedby="cargarRevisionAnual">
+                          <label class="custom-file-label" for="cargarRevision">Elige Archivo...</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" 
+                            type="button" 
+                            id="cargarRevisionAnual"
+                            (click)="onCargarRevisionAnual()">Cargar</button>
+                        </div>
+                    </div>    
                 </div>
             </div>
         </div>

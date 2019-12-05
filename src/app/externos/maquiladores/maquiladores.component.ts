@@ -1,58 +1,60 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Maquilador } from '../../shared/maquilador.model';
 import { Proveedor } from '../../shared/proveedor.model';
 import { ProveedorService } from '../../proveedor.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-maquiladores',
   templateUrl: './maquiladores.component.html',
   styleUrls: ['./maquiladores.component.css']
 })
-export class MaquiladoresComponent implements OnInit {
-  @Input() proveedor: Proveedor;
+export class MaquiladoresComponent implements OnInit, OnDestroy {
+  proveedor: Proveedor;
   maquila: Maquilador;
   maquilaForm: FormGroup;
-  nombreMaquila: FormControl;
-  telMaquila: FormControl;
-  correoMaquila: FormControl;
-  rfcMaquila: FormControl;
-  dirMaquila: FormControl;
   responsableSanitarioMaquiladora: FormControl;
   opcionesResponsableSanitario = ['Sí', 'No'];
   idResponsableMaquilador = 'asdfgqwert12345z';
   idAvisoFuncionamiento = 'asdfgqwert12345x';
+  agregarMaquiladorIn: boolean;
+  subscNvoMaquilador: Subscription;
+  subscMaqSeleccionado: Subscription;
 
-  constructor(private provService: ProveedorService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private provService: ProveedorService, private router: Router, 
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.maquila = new Maquilador('', '', '', '', '', null, 'No', null);
+    this.maquila = this.provService.maquila;
+    console.log(this.maquila);
+    if(this.maquila == undefined) {
+      this.maquila = new Maquilador('', '', '', '', '', null, 'No', null);
+    }
+    this.inicializarForma();
 
-    this.maquilaForm = new FormGroup({
-      nombreMaquila: new FormControl(null, Validators.required),
-      telMaquila: new FormControl(null, Validators.required),
-      correoMaquila: new FormControl(null, Validators.required),
-      rfcMaquila: new FormControl(null, Validators.required),
-      dirMaquila: new FormControl(null, Validators.required),
-      responsableSanitarioMaquiladora: new FormControl('No', Validators.required)
+    this.subscNvoMaquilador = this.provService.nuevoMaquilador.
+    subscribe((indicacion) => {
+      this.agregarMaquiladorIn = indicacion;
     });
+
+    this.subscMaqSeleccionado = this.provService.MaquiladorSeleccionado
+    .subscribe((maquila) => {
+      this.maquila = maquila;
+      this.inicializarForma();
+      console.log(this.maquila);
+    })
   }
 
   agregarMaquila() {
     // tslint:disable-next-line:no-string-literal
-    this.maquila = {
-      nombre: this.maquilaForm.controls.nombreMaquila.value,
-      telefono: this.maquilaForm.controls.telMaquila.value,
-      correo: this.maquilaForm.controls.correoMaquila.value,
-      rfcMaquilador: this.maquilaForm.controls.rfcMaquila.value,
-      direccionMaquilador: this.maquilaForm.controls.dirMaquila.value,
-      responsableMaquilador: this.maquilaForm.controls.responsableSanitarioMaquiladora.value,
-      idResponsableMaquilador: this.idResponsableMaquilador,
-      idAvisoFuncionamientoMaquilador: this.idAvisoFuncionamiento
-    };
-    this.provService.nuevoMaquilador.next(this.maquila);
+    this.maquila = new Maquilador(this.maquilaForm.controls.nombreMaquila.value,
+      this.maquilaForm.controls.telMaquila.value, this.maquilaForm.controls.correoMaquila.value,
+      this.maquilaForm.controls.rfcMaquila.value, this.maquilaForm.controls.dirMaquila.value,
+      this.maquilaForm.controls.responsableSanitarioMaquiladora.value, this.idResponsableMaquilador,
+       this.idAvisoFuncionamiento);
     this.maquilaForm.reset({
       nombreMaquila: null,
       telMaquila: null,
@@ -61,7 +63,31 @@ export class MaquiladoresComponent implements OnInit {
       dirMaquila: null,
       responsableSanitarioMaquiladora: 'No'
     });
+    this.provService.agregarMaquilador.next(this.maquila);
     this.router.navigate(['../'], {relativeTo: this.route});
+    // this.provService.nuevoMaquilador.next(false);
+  }
+
+  onCancelAgregarMaquila() {
+    
+    this.router.navigate(["../"], {relativeTo: this.route});
+  }
+
+  inicializarForma() {
+    this.maquilaForm = new FormGroup({
+      nombreMaquila: new FormControl(this.maquila.nombre, Validators.required),
+      telMaquila: new FormControl(this.maquila.telefono, Validators.required),
+      correoMaquila: new FormControl(this.maquila.correo, Validators.required),
+      rfcMaquila: new FormControl(this.maquila.rfcMaquilador, Validators.required),
+      dirMaquila: new FormControl(this.maquila.direccionMaquilador, Validators.required),
+      responsableSanitarioMaquiladora: new FormControl(this.maquila.responsableMaquilador, Validators.required)
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscMaqSeleccionado.unsubscribe();
+    this.subscNvoMaquilador.unsubscribe();
+    this.provService.setMaquilador(undefined);
   }
 
 }

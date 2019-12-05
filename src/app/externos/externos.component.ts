@@ -1,41 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Subject, Subscription } from 'rxjs';
 
 import { Proveedor } from '../shared/proveedor.model';
-import { Maquilador } from '../shared/maquilador.model';
 import { ProveedorService } from '../proveedor.service';
+
 
 @Component({
   selector: 'app-externos',
   templateUrl: './externos.component.html',
   styleUrls: ['./externos.component.css']
 })
-export class ExternosComponent implements OnInit {
-
+export class ExternosComponent implements OnInit, OnDestroy {
+  subscriptionNvoMaq: Subscription;
+  subscriptionAgrMaq: Subscription;
   proveedor: Proveedor;
   altaProveedorForm: FormGroup;
-  nombreProveedor: FormControl;
-  telProveedor: FormControl;
-  mailProveedor: FormControl;
-  rfcProveedor: FormControl;
-  dirProveedor: FormControl;
-  idProveedor: FormControl;
-  isResponsableSanitario: FormControl;
-  utilizasMaquiladores: FormControl;
   responsableSanitario = ['Aplica', 'No Aplica'];
   opcionesMaquiladores = ['Sí', 'No', 'No aplica'];
-  nuevoMaquilador = new Subject<Maquilador>();
+  id: number;
+  agregarMaquiladorOut: boolean = false;
 
-  constructor(private provService: ProveedorService) { }
+  constructor(private provService: ProveedorService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-
-    this.proveedor = new Proveedor('', '', '', '', '', 'No Aplica', 'No aplica', [], [], [], [], [], '', false);
-    // this.prov.createProveedorTemporal(this.proveedor);
+    this.id = +this.route.snapshot.params.id;
+    
+    if(this.id) {
+      console.log(this.id);
+      this.proveedor = this.provService.getProveedor(this.id);
+    } else {
+      this.proveedor = new Proveedor('', '', '', '', '', 'No Aplica', 'No aplica', [], [], [], [], [], '', false);
+      // this.prov.createProveedorTemporal(this.proveedor);
+    }  
     this.iniciarForma();
     console.log(this.proveedor);
-    this.provService.nuevoMaquilador.subscribe((maquilador) => {
+
+    this.route.params.subscribe((params) => {
+      this.id = params.id;
+    });
+
+    // this.subscriptionNvoMaq = this.provService.nuevoMaquilador
+    // .subscribe((valor) => {
+    //   this.agregarMaquiladorOut = valor;
+    //   console.log(this.agregarMaquiladorOut);
+    // });
+
+    this.subscriptionAgrMaq = this.provService.agregarMaquilador
+    .subscribe((maquilador) => {
       this.proveedor.maquiladores.push(maquilador);
       console.log(this.proveedor);
     });
@@ -52,6 +65,7 @@ export class ExternosComponent implements OnInit {
     this.proveedor.utilizaMaquiladores = this.altaProveedorForm.controls.utilizasMaquiladores.value;
     // this.proveedor = this.altaProveedorForm.value();
     this.provService.addProveedor(this.proveedor);
+    this.onCancelAgregarMaquilador();
     console.log(this.provService.getProveedores());
   }
 
@@ -63,9 +77,22 @@ export class ExternosComponent implements OnInit {
       rfcProveedor: new FormControl(this.proveedor.rfcProveedor, [Validators.required, Validators.maxLength(14)]),
       dirProveedor: new FormControl(this.proveedor.direccionProveedor, Validators.required),
       idProveedor: new FormControl({value: this.proveedor.idProveedor, disabled: 'true'}, [Validators.maxLength(10)]),
-      isResponsableSanitario: new FormControl(this.responsableSanitario[1], Validators.required),
-      utilizasMaquiladores: new FormControl(this.opcionesMaquiladores[2], Validators.required)
+      isResponsableSanitario: new FormControl(this.proveedor.responsableSanitario, Validators.required),
+      utilizasMaquiladores: new FormControl(this.proveedor.utilizaMaquiladores, Validators.required)
     });
+  }
+
+  onAgregarMaquilador() {
+    this.provService.nuevoMaquilador.next(true);
+  }
+
+  onCancelAgregarMaquilador() {
+    this.provService.nuevoMaquilador.next(false);
+  }
+
+  ngOnDestroy() {
+    // this.subscriptionNvoMaq.unsubscribe();
+    this.subscriptionAgrMaq.unsubscribe();
   }
 
 }

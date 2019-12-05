@@ -6,8 +6,13 @@ import { Maquilador } from './shared/maquilador.model';
 @Injectable({providedIn: 'root'})
 export class ProveedorService {
 
-    provTemporal: Proveedor;
-    nuevoMaquilador = new Subject<Maquilador>();
+    pvrsEncontrados: Proveedor[];
+    nuevoMaquilador = new Subject<boolean>();
+    agregarMaquilador = new Subject<Maquilador>();
+    proveedoresEncontrados = new Subject<Proveedor[]>();
+    MaquiladorSeleccionado = new Subject<Maquilador>();
+    maquila: Maquilador;
+
     public proveedores: Proveedor[] = [
         {
             idProveedor: 234243,
@@ -17,7 +22,7 @@ export class ProveedorService {
             rfcProveedor: 'ABC010101DEF',
             direccionProveedor: 'Dirección Conocida',
             responsableSanitario: 'Aplica',
-            utilizaMaquiladores: 'Aplica',
+            utilizaMaquiladores: 'Sí',
             maquiladores: [
                 {
                     nombre: 'Maquilador 1',
@@ -46,14 +51,14 @@ export class ProveedorService {
             aprobado: true
         },
         {
-            idProveedor: 234243,
+            idProveedor: 234244,
             nombre: 'Proveedor Prueba 2',
             telefono: '2343243',
             correo: 'correo@correo.com',
             rfcProveedor: 'ABC010101DEF',
             direccionProveedor: 'Dirección Conocida',
-            responsableSanitario: 'Aplica',
-            utilizaMaquiladores: 'Aplica',
+            responsableSanitario: 'No Aplica',
+            utilizaMaquiladores: 'Sí',
             maquiladores: [
                 {
                     nombre: 'Maquilador 1',
@@ -63,7 +68,7 @@ export class ProveedorService {
                     direccionMaquilador: 'Dirección Conocida',
                     idAvisoFuncionamientoMaquilador: '23423434',
                     responsableMaquilador: 'Aplica',
-                    idResponsableMaquilador: 'Aplica' }
+                    idResponsableMaquilador: '23423434' }
             ],
             medicamentos: [],
             suplementos: [],
@@ -89,6 +94,25 @@ export class ProveedorService {
 
     getProveedor(provId: number) {
         return this.proveedores.find((prov) => provId === +prov.idProveedor);
+    }
+
+    searchProveedor({nombre, idProveedor, rfcProveedor, estado, responsableSanitario}) {
+        if(estado === 'Activo'){
+            estado = true;
+        }
+        this.proveedores.filter((proveedor) => {
+            proveedor.nombre == nombre && 
+            proveedor.idProveedor == idProveedor && 
+            proveedor.rfcProveedor == rfcProveedor && 
+            proveedor.aprobado == estado && 
+            proveedor.responsableSanitario == responsableSanitario
+        console.log(proveedor);
+        // this.proveedoresEncontrados.next(proveedor);
+        });
+    }
+
+    setMaquilador(maquilador) {
+        this.maquila = maquilador;
     }
 
 }

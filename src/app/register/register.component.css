@@ -1,0 +1,18 @@
+.container{
+    margin-top: 30px;
+    width: 100%;
+    min-height: 28rem;
+    color:  rgb(117, 117, 117);
+}
+
+h1 {
+    color: rgb(117, 117, 117);
+}
+
+h4 {
+    color: rgb(117, 117, 117);
+}
+
+button {
+    color: white;
+}

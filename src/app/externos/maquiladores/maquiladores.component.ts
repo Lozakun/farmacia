@@ -23,6 +23,7 @@ export class MaquiladoresComponent implements OnInit, OnDestroy {
   agregarMaquiladorIn: boolean;
   subscNvoMaquilador: Subscription;
   subscMaqSeleccionado: Subscription;
+  maquilaNueva: boolean;
 
   constructor(private provService: ProveedorService, private router: Router, 
     private route: ActivatedRoute) { }
@@ -31,7 +32,10 @@ export class MaquiladoresComponent implements OnInit, OnDestroy {
     this.maquila = this.provService.maquila;
     console.log(this.maquila);
     if(this.maquila == undefined) {
+      this.maquilaNueva = true;
       this.maquila = new Maquilador('', '', '', '', '', null, 'No', null);
+    } else {
+      this.maquilaNueva = false;
     }
     this.inicializarForma();
 
@@ -64,6 +68,7 @@ export class MaquiladoresComponent implements OnInit, OnDestroy {
       responsableSanitarioMaquiladora: 'No'
     });
     this.provService.agregarMaquilador.next(this.maquila);
+    this.maquilaNueva = false;
     this.router.navigate(['../'], {relativeTo: this.route});
     // this.provService.nuevoMaquilador.next(false);
   }
@@ -80,7 +85,8 @@ export class MaquiladoresComponent implements OnInit, OnDestroy {
       correoMaquila: new FormControl(this.maquila.correo, Validators.required),
       rfcMaquila: new FormControl(this.maquila.rfcMaquilador, Validators.required),
       dirMaquila: new FormControl(this.maquila.direccionMaquilador, Validators.required),
-      responsableSanitarioMaquiladora: new FormControl(this.maquila.responsableMaquilador, Validators.required)
+      responsableSanitarioMaquiladora: new FormControl(this.maquila.responsableMaquilador, Validators.required),
+      avisoFuncionamientoMaquiladora: new FormControl(null)
     });
   }
 

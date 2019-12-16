@@ -43,11 +43,6 @@
         ></textarea>
     </div>
     <div class="form-group form-inline">
-        <label class="col-5" for="avisoFuncionamientoMaquiladora">Aviso de Funcionamiento / Licencia Sanitaria:</label>
-        <input type="hidden" name="avisoFuncionamientoMaquiladora" id="avisoFuncionamientoMaquiladora" [value]="idAvisoFuncionamiento">
-        <button class="btn btn-primary">Subir Archivo</button>
-    </div>
-    <div class="form-group form-inline">
         <label class="col-5" for="responsableSanitarioMaquiladora">Responsable Sanitario:</label>
         <select
         id="responsableSanitarioMaquiladora"
@@ -63,6 +58,25 @@
         *ngIf="maquilaForm.controls['responsableSanitarioMaquiladora'].value === 'Sí'"
         class="btn btn-primary col-4"
         type="button">Subir Archivo</button>
+    </div>
+    <div class="form-group form-inline" *ngIf="!proveedorNuevo">
+        <label class="col-5" for="cargarLicencia">Aviso de Funcionamiento / Licencia Sanitaria:</label>
+        <div class="input-group col-7">
+            <div class="custom-file">
+            <input type="file" 
+            class="custom-file-input" 
+            id="cargarLicencia" 
+            ria-describedby="inputGroupFileAddon04"
+            formControlName="avisoFuncionamientoMaquiladora">
+                <label class="custom-file-label" for="cargarLicencia">
+                <span *ngIf="maquilaForm.get('avisoFuncionamientoMaquiladora').value == undefined">Elige Archivo...</span>
+                <span *ngIf="maquilaForm.get('avisoFuncionamientoMaquiladora').value != undefined">{{ altaProveedorForm.get('avisoFuncionamientoMaquiladora').value }}</span>
+                </label>
+            </div>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" id="inputGroupFileAddon04">Cargar</button>
+            </div>
+        </div>
     </div>
     <div class="form-group form-inline">
         <div class="col-2"></div>

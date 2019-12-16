@@ -17,6 +17,9 @@ import { MaquiladoresComponent } from './externos/maquiladores/maquiladores.comp
 import { ListadoMaquiladorasComponent } from './externos/listado-maquiladoras/listado-maquiladoras.component';
 import { ProveedorService } from './proveedor.service';
 import { FiltrosComponent } from './backoffice/filtros/filtros.component';
+import { LoginComponent } from './login/login.component';
+import { UsuarioService } from './shared/usuario.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { FiltrosComponent } from './backoffice/filtros/filtros.component';
     EstadoSolicitudesComponent,
     MaquiladoresComponent,
     ListadoMaquiladorasComponent,
-    FiltrosComponent
+    FiltrosComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     NgbModule,
@@ -40,7 +45,7 @@ import { FiltrosComponent } from './backoffice/filtros/filtros.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [ProveedorService],
+  providers: [ProveedorService, UsuarioService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

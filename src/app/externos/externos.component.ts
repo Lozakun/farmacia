@@ -21,6 +21,7 @@ export class ExternosComponent implements OnInit, OnDestroy {
   opcionesMaquiladores = ['Sí', 'No', 'No aplica'];
   id: number;
   agregarMaquiladorOut: boolean = false;
+  proveedorNuevo: boolean;
 
   constructor(private provService: ProveedorService, private route: ActivatedRoute) { }
 
@@ -29,8 +30,10 @@ export class ExternosComponent implements OnInit, OnDestroy {
     
     if(this.id) {
       console.log(this.id);
+      this.proveedorNuevo = false;
       this.proveedor = this.provService.getProveedor(this.id);
     } else {
+      this.proveedorNuevo = true;
       this.proveedor = new Proveedor('', '', '', '', '', 'No Aplica', 'No aplica', [], [], [], [], [], '', false);
       // this.prov.createProveedorTemporal(this.proveedor);
     }  
@@ -56,6 +59,7 @@ export class ExternosComponent implements OnInit, OnDestroy {
 
   guardarProveedor() {
     console.log(this.altaProveedorForm.controls.nombreProveedor.value);
+    console.log(this.altaProveedorForm.controls.avisoFuncionamiento.value);
     this.proveedor.nombre = this.altaProveedorForm.controls.nombreProveedor.value;
     this.proveedor.telefono = this.altaProveedorForm.controls.telProveedor.value;
     this.proveedor.correo = this.altaProveedorForm.controls.mailProveedor.value;
@@ -66,6 +70,7 @@ export class ExternosComponent implements OnInit, OnDestroy {
     // this.proveedor = this.altaProveedorForm.value();
     this.provService.addProveedor(this.proveedor);
     this.onCancelAgregarMaquilador();
+    this.proveedorNuevo = false;
     console.log(this.provService.getProveedores());
   }
 
@@ -77,6 +82,7 @@ export class ExternosComponent implements OnInit, OnDestroy {
       rfcProveedor: new FormControl(this.proveedor.rfcProveedor, [Validators.required, Validators.maxLength(14)]),
       dirProveedor: new FormControl(this.proveedor.direccionProveedor, Validators.required),
       idProveedor: new FormControl({value: this.proveedor.idProveedor, disabled: 'true'}, [Validators.maxLength(10)]),
+      avisoFuncionamiento: new FormControl(null),
       isResponsableSanitario: new FormControl(this.proveedor.responsableSanitario, Validators.required),
       utilizasMaquiladores: new FormControl(this.proveedor.utilizaMaquiladores, Validators.required)
     });

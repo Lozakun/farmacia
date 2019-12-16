@@ -1,6 +1,6 @@
 <header class="navbar navbar-light navbar-fixed-top navbar-expand-lg"> 
   
-    <a class="navbar-brand" [routerLink]="['/']" (click)="navbarCollapsed = true">Farmacia</a> 
+    <a class="navbar-brand" style="cursor: pointer;" (click)="onFarmacia()">Farmacia</a> 
    
     <button class="navbar-toggler navbar-toggler-right" type="button" (click)="navbarCollapsed = !navbarCollapsed" 
             [attr.aria-expanded]="!navbarCollapsed" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"> 
@@ -19,5 +19,6 @@
           <a class="nav-link" [routerLink]="['/backoffice']" (click)="navbarCollapsed = true">Backoffice</a> 
         </li>
       </ul> 
+      <a class="btn btn-danger float-right" [routerLink]="['/']" (click)="onCerrarSesion()">Cerrar Sesión</a>   
     </div> 
   </header> 

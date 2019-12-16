@@ -2,3 +2,15 @@ button.btn.btn-warning {
     color: white;
     background-color: rgb(244, 123, 32)
 }
+
+div.input-group.col-7{
+    padding: 0px;
+}
+
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+    content: "Elegir";
+}
+
+.form-inline label {
+    justify-content: left;
+}

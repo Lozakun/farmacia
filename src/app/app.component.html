@@ -1,5 +1,5 @@
 <div id="header"><img src="../assets/logo-wlmart.png" alt="Walmart"></div>
-<app-header></app-header>
+<app-header *ngIf="login"></app-header>
 <div class="container">
     <router-outlet></router-outlet>
 </div>

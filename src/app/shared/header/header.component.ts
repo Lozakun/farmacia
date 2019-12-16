@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbTypeaheadWindow } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahead-window';
+import { Router } from '@angular/router';
+
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-header',
@@ -9,12 +11,27 @@ import { NgbTypeaheadWindow } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahe
 export class HeaderComponent implements OnInit {
   navbarCollapsed = true;
   components = [];
-  constructor() { }
+  constructor(private userServ: UsuarioService, private router: Router) { }
 
   ngOnInit() {
   }
 
   toggleMenu() {
     this.navbarCollapsed = !this.navbarCollapsed;
+  }
+
+  onCerrarSesion() {
+    this.userServ.onStatusChange.next(false);
+    this.navbarCollapsed = !this.navbarCollapsed;
+  }
+
+  onFarmacia() {
+    this.navbarCollapsed = !this.navbarCollapsed;
+    console.log(this.userServ.loggeado);
+    if(this.userServ.loggeado){
+      this.router.navigate(['/backoffice']);
+    }else {
+      this.router.navigate(['/']);
+    }
   }
 }

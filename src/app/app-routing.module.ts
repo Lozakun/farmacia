@@ -5,6 +5,8 @@ import { ExternosComponent } from './externos/externos.component';
 import { BackofficeComponent } from './backoffice/backoffice.component';
 import { ProveedorFarmaciaComponent } from './proveedor-farmacia/proveedor-farmacia.component';
 import { MaquiladoresComponent } from './externos/maquiladores/maquiladores.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
 {path: 'externos', children: [
@@ -19,7 +21,9 @@ const routes: Routes = [
 ]},
 {path: 'registro-medicamento', component: ProveedorFarmaciaComponent},
 {path: 'backoffice', component: BackofficeComponent},
-{path: '', redirectTo: 'externos/new', pathMatch: 'full'}
+{path: 'register', component: RegisterComponent},
+{path: 'login', component: LoginComponent},
+{path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 @NgModule({
